@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+  <title>TAE-1(EM-II)</title>
+  <div class="heading">
+  </div>
+<script>
+function add()
+{
+  var num1 = parseInt(document.getElementById("phase").value);
+  var num2 = parseInt(document.getElementById("pole").value);
+  var num3 = parseInt(document.getElementById("slot").value);
+  var num4 = parseInt(document.getElementById("conductor").value);
+  var num5 = parseFloat(document.getElementById("flux").value);
+  var num6 = parseInt(document.getElementById("speed").value);
+  //Solution Calculation
+  var feq = (num6 * num2)/120;
+  var Tph = (num4 * num3)/(3 * 2);
+  var m = (num3/(num2 * num1));
+  var bt = (180*num2)/num3;
+  var pi = Math.PI;
+  var x = Math.sin((m*(bt/2))*(pi/180));
+  var y = Math.sin((bt/2)*(pi/180));
+  var Kc = 1;
+  var a = (x/(m*y));
+  var Kd = a.toFixed(4)
+  var b = 4.44*Kc*Kd*num5*feq*Tph;
+  var Eph = b.toFixed(2)
+  var sqt = Math.sqrt(3);
+  var c = (sqt*Eph);
+  var El = c.toFixed(2)
+
+  document.getElementById('a1').innerHTML = "Answer Frequency(f) Is:    "+"<span style=\"color:#00FF00\">" + feq +" Hz"+ "</span>";
+  document.getElementById('a2').innerHTML = "Answer Of Tph Is:    "+"<span style=\"color:#00FF00\">" + Tph +" /Phase"+ "</span>";
+  document.getElementById('a3').innerHTML = "Answer Of m Is:    "+"<span style=\"color:#00FF00\">" + m + "</span>";
+  document.getElementById('a4').innerHTML = "Answer Of Kc Is:    "+"<span style=\"color:#00FF00\">" + Kc + "</span>";
+  document.getElementById('a5').innerHTML = "Answer Of Kd Is:    "+"<span style=\"color:#00FF00\">" + Kd + "</span>";
+  document.getElementById('a6').innerHTML = "Answer Of Eph Is:    "+"<span style=\"color:#00FF00\">" + Eph +" Volt"+ "</span>";
+  document.getElementById('a7').innerHTML = "Answer Of El Is:    "+"<span style=\"color:#00FF00\">" + El +" Volt"+ "</span>";
+    }
+</script>
+</head>
+<body>
+  <marquee class="hed"scrollamount="9">A 3-phase, 16-pole synchronous generator has a star-connected winding with 144 slots and 10 conductors per slot. The flux per pole is 0.04 Wb (sinusoidally distributed) and the speed is 375 rpm. Calculate the frequency and phase & line induced emf’s. The total turns/phase may be assumed to be series connected.</marquee>
+<div align="center" class="giv">
+  <h2>GIVEN DATA</h2>
+  <div class="inp">
+    <p>Select Phase: <select id="phase" name="phaselist">
+      <option value="">Select</option>
+      <option value="1">Single Phase</option>
+      <option value="3">Three Phase</option>      
+    </select></p>
+    <p>Enter No Of Poles: <input id="pole" type="number" placeholder="Enter The Number"></p>
+    <p>Enter No Of Slots: <input id="slot" type="number" placeholder="Enter The Number"></p>
+    <p>Enter No Of Conductor/Slot: <input id="conductor" type="number" placeholder="Enter The Number"></p>
+    <p>Enter The Value For Flux: <input id="flux" type="number" placeholder="Enter The Number"></p>
+    <p>Enter The Value For Synchrous Speed: <input id="speed" type="number" placeholder="Enter The Number"></p>
+  </div>
+  <button  class="btn" onclick="add()" id="btn">Calculate</button>
+</div>
+<div align="center" class="answer" id="ans">
+  <h1>ANSWER TAB</h1>
+  <p><div class="a" id="a1"></div>
+  <p><div class="a" id="a2"></div>
+  <p><div class="a" id="a3"></div>
+  <p><div class="a" id="a4"></div>
+  <p><div class="a" id="a5"></div>
+  <p><div class="a" id="a6"></div>
+  <p><div class="a" id="a7"></div>
+  <br>
+</div>
+<footer align="center">&copy; Copyright 2022 <a href="https://www.linkedin.com/in/saurabh-yenurkar-bb109a241/" target="_blank"><i>Saurabh Yenurkar</i></a></footer>
+</body>
+</html>
